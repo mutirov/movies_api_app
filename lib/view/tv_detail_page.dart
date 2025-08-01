@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb_api/models/tmdb_model.dart';
+import 'package:tmdb_api/models/tv_series_model.dart';
 
-class DetailPage extends StatelessWidget {
-  final Results movie;
-  const DetailPage({super.key, required this.movie});
+class TvDetailPage extends StatelessWidget {
+  final TVSeriesModel tvSeries;
+  const TvDetailPage({super.key, required this.tvSeries});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Movie Details'),
+      appBar: AppBar(title: Text('TV Series Details'),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.white),
         onPressed: () => Navigator.of(context).pop(),
@@ -23,7 +23,7 @@ class DetailPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.network(
-                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                    'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width * 0.8,
                   ),
@@ -31,7 +31,7 @@ class DetailPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                movie.title ?? '',
+                tvSeries.name,
                 style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
@@ -40,34 +40,6 @@ class DetailPage extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Divider(color: Colors.white24, thickness: 0.5),
-              const SizedBox(height: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 8,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white10,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.star, color: Colors.amber),
-                    const SizedBox(width: 4),
-                    Text(
-                      movie.voteAverage?.toStringAsFixed(1) ?? 'N/A',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    const SizedBox(width: 16),
-                    const Icon(Icons.date_range, color: Colors.grey),
-                    const SizedBox(width: 4),
-                    Text(
-                      movie.releaseDate ?? 'N/A',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
               const SizedBox(height: 16),
               const Text(
                 'Overview',
@@ -79,7 +51,7 @@ class DetailPage extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                movie.overview ?? 'No overview available',
+                tvSeries.overview ,
                 style: const TextStyle(fontSize: 16, color: Colors.white70),
                 textAlign: TextAlign.justify,
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb_api/models/tmdb_model.dart';
+import 'package:tmdb_api/view/detail_page.dart';
 
 class UpcomingMovies extends StatelessWidget {
   final List<Results> movies;
@@ -29,7 +30,12 @@ class UpcomingMovies extends StatelessWidget {
               final movie = movies[index];
               return GestureDetector(
                 onTap: () {
-                  // Handle movie tap
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailPage(movie: movie),
+                    ),
+                  );
                   print('Tapped on ${movie.title}');
                 },
                 child: Container(
@@ -48,8 +54,12 @@ class UpcomingMovies extends StatelessWidget {
                       ),
                       SizedBox(height: 8),
                       Text(
-                       movie.title ?? 'No title', // Placeholder title
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                        movie.title ?? 'No title', // Placeholder title
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

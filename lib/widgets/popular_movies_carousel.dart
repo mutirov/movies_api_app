@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:tmdb_api/models/tmdb_model.dart';
+import 'package:tmdb_api/view/detail_page.dart';
 
 class PopularMoviesCarousel extends StatelessWidget {
   final List<Results> movies;
@@ -23,7 +24,12 @@ class PopularMoviesCarousel extends StatelessWidget {
             final movie = movies[index];
             return GestureDetector(
               onTap: () {
-                // Handle movie tap
+               Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailPage(movie: movie),
+                  ),
+                );
                 print('Tapped on ${movie.title}');
               },
               child: Column(

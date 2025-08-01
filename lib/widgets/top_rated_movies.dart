@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb_api/models/tmdb_model.dart';
+import 'package:tmdb_api/view/detail_page.dart';
 
 class TopRatedMovies extends StatelessWidget {
   final List<Results> movies;
@@ -18,10 +19,11 @@ class TopRatedMovies extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
-        ),SizedBox(height: 10),
+        ),
+        SizedBox(height: 10),
         SizedBox(
           height: 250,
-           width: MediaQuery.of(context).size.width,
+          width: MediaQuery.of(context).size.width,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: movies.length,
@@ -29,7 +31,12 @@ class TopRatedMovies extends StatelessWidget {
               final movie = movies[index];
               return GestureDetector(
                 onTap: () {
-                  // Handle movie tap
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailPage(movie: movie),
+                    ),
+                  );
                   print('Tapped on ${movie.title}');
                 },
                 child: Container(
@@ -49,7 +56,11 @@ class TopRatedMovies extends StatelessWidget {
                       SizedBox(height: 8),
                       Text(
                         movie.title ?? 'No title',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
